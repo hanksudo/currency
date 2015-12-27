@@ -1,6 +1,10 @@
 # bot-currency
 
-Simple program to response currecny rate
+Currecny rate from BOT (Bank Of Taiwan)
+
+- Slack Command
+- Simple API
+- CSV history
 
 ## Installation
 
