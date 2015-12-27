@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/hanksudo/bot-currency/currency"
 	"github.com/hanksudo/bot-currency/info"
@@ -43,23 +44,32 @@ func renew_handler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
+type SlackAttachment struct {
+	Text string `json:"text"`
+}
+
+type SlackPostMessage struct {
+	ResponseType string            `json:"response_type"`
+	Text         string            `json:"text"`
+	Attachments  []SlackAttachment `json:"attachments"`
+}
+
 func slack_handler(w http.ResponseWriter, r *http.Request) {
 	currency, err := info.Get(r.FormValue("text"))
 	response := ""
 	if err != nil {
 		response = "找不到這個貨幣耶"
 	} else {
-		response = "現金買入: "+currency.BuyCach+", 現金賣出: "+currency.SellCash+"\n即期買入: "+currency.BuySpot+", 即期賣出: "+currency.SellSpot
+		response = fmt.Sprintf("現金買入: %v, 現金賣出: %v\n即期買入: %v, 即期賣出: %v", currency.BuyCach, currency.SellCash, currency.BuySpot, currency.SellSpot)
 	}
-	json.NewEncoder(w).Encode(map[string]string{
-	    "response_type": "in_channel",
-	    "text": "Currency rate for: " strings.ToUpper(r.FormValue("text")),
-	    "attachments": [
-	        {
-	            "text": response
-	        }
-	    ]
-	})
+	postMessage := SlackPostMessage{}
+	postMessage.ResponseType = "in_channel"
+	postMessage.Text = "Currency rate for: " + strings.ToUpper(r.FormValue("text"))
+
+	attachment := SlackAttachment{Text: response}
+	postMessage.Attachments = []SlackAttachment{attachment}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(postMessage)
 }
 
 func main() {
