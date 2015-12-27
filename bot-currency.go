@@ -46,5 +46,5 @@ func renew_handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/renew", renew_handler)
-	log.Fatal(http.ListenAndServe("localhost:3001", Log(http.DefaultServeMux)))
+	log.Fatal(http.ListenAndServe(":3030", Log(http.DefaultServeMux)))
 }
