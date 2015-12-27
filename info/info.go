@@ -48,7 +48,7 @@ func Get(currencyName string) (*Currency, error) {
 			}
 		}
 
-		if strings.TrimSpace(record[0]) == strings.ToLower(currencyName) {
+		if strings.TrimSpace(record[0]) == strings.ToUpper(currencyName) {
 			buyCash, _ := strconv.ParseFloat(strings.TrimSpace(record[2]), 64)
 			buySpot, _ := strconv.ParseFloat(strings.TrimSpace(record[3]), 64)
 			sellCash, _ := strconv.ParseFloat(strings.TrimSpace(record[12]), 64)
