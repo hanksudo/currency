@@ -15,5 +15,5 @@ export GOPATH=$HOME/go
 export GOROOT=`go env GOROOT`
 export PATH=$PATH:$GOPATH/bin
 
-go get github.com/hanksudo/bot-currency
+go get -u github.com/hanksudo/bot-currency
 ```
