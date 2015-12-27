@@ -3,7 +3,6 @@ package info
 import (
 	"encoding/csv"
 	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -48,8 +47,8 @@ func Get(currencyName string) (*Currency, error) {
 				log.Fatal(err)
 			}
 		}
-		fmt.Println(record[0], currencyName)
-		if strings.TrimSpace(record[0]) == currencyName {
+
+		if strings.TrimSpace(record[0]) == strings.ToLower(currencyName) {
 			buyCash, _ := strconv.ParseFloat(strings.TrimSpace(record[2]), 64)
 			buySpot, _ := strconv.ParseFloat(strings.TrimSpace(record[3]), 64)
 			sellCash, _ := strconv.ParseFloat(strings.TrimSpace(record[12]), 64)
