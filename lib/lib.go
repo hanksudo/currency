@@ -8,7 +8,10 @@ import (
 )
 
 func Fetch(url string) *http.Response {
-	resp, err := http.Get(url)
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Add("Accept-Language", "en")
+	resp, err := client.Do(req)
 
 	if err != nil {
 		log.Fatal(err)
