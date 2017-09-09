@@ -4,7 +4,7 @@ Currecny rate from BOT (Bank Of Taiwan)
 
 - Slack slash command to get currency rate 
 
-![](./screenshots/slash_command.png)
+<img src="./screenshots/slash_command.png" width="320">
     
 - Web API to contrl renew time
 - History CSV files
