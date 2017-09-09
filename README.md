@@ -2,6 +2,9 @@
 
 Currecny rate from BOT (Bank Of Taiwan)
 
+
+## Features
+
 - Slack slash command to get currency rate 
 
 <img src="./screenshots/slash_command.png" width="320">
