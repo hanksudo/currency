@@ -7,11 +7,12 @@ from dropbox.exceptions import ApiError, AuthError
 
 # (https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
 TOKEN = ""
-LOCAL_FOLDER = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_FOLDER = os.path.dirname(os.path.abspath(__file__))
+CSV_FOLDER = os.path.dirname(SCRIPT_FOLDER) + "/csvs/"
 
 
 def upload_file(filename):
-    with open(LOCAL_FOLDER + "/" + filename, "r") as f:
+    with open(CSV_FOLDER + filename, "r") as f:
         try:
             print "Uploading file: {}".format(filename)
             dbx.files_upload(f, "/{}".format(filename), mode=WriteMode("overwrite"))
@@ -40,7 +41,7 @@ if __name__ == "__main__":
 
     exists_filenames = [entry.name for entry in dbx.files_list_folder("").entries]
 
-    for (dirpath, dirnames, filenames) in os.walk(LOCAL_FOLDER):
+    for (dirpath, dirnames, filenames) in os.walk(CSV_FOLDER):
         for filename in filenames:
             name, ext = os.path.splitext(filename)
             # only upload file with CSV extension

@@ -21,3 +21,10 @@ export PATH=$PATH:$GOPATH/bin
 
 go get -u github.com/hanksudo/bot-currency
 ```
+
+
+### Cronjob - backup CSV to dropbox
+
+```bash
+0 */3 * * 1,2,3,4,5 /usr/bin/python $GOPATH/src/github.com/hanksudo/bot-currency/scripts/backup_to_dropbox.py
+```
