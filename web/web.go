@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/hanksudo/bot-currency/currency"
-	"github.com/hanksudo/bot-currency/info"
 )
 
 // Start - web service
@@ -37,7 +36,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "Hello?")
 		return
 	}
-	content, err := info.Get(currencyName)
+	content, err := currency.Get(currencyName)
 	if err != nil {
 		fmt.Fprint(w, "What?")
 		return

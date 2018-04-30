@@ -9,7 +9,11 @@ import (
 	"github.com/hanksudo/bot-currency/web"
 )
 
+// RootPath - root of project
+var RootPath string
+
 func main() {
+	RootPath, _ = os.Getwd()
 	webPtr := flag.Bool("web", false, "Start web server")
 	renewPtr := flag.Bool("renew", false, "Renew currency data")
 	backupPtr := flag.Bool("backup", false, "Backup to Dropbox")

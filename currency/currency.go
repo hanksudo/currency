@@ -4,14 +4,13 @@ import (
 	"io/ioutil"
 	"log"
 	"mime"
-
-	"github.com/hanksudo/bot-currency/lib"
+	"net/http"
 )
 
 // Renew - currency data
 func Renew() {
 	log.Println("Currency data renew")
-	resp := lib.Fetch("http://rate.bot.com.tw/xrt/flcsv/0/day")
+	resp := fetch("http://rate.bot.com.tw/xrt/flcsv/0/day")
 	contentCsv, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -29,4 +28,16 @@ func Renew() {
 			ioutil.WriteFile("latest.dat", []byte(params["filename"]), 0644)
 		}
 	}
+}
+
+func fetch(url string) *http.Response {
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Add("Accept-Language", "en")
+	resp, err := client.Do(req)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	return resp
 }
