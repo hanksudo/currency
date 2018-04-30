@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"os/exec"
 	"strings"
 
 	"github.com/hanksudo/bot-currency/currency"
@@ -73,6 +76,40 @@ func slackHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	webPtr := flag.Bool("web", false, "Start web server")
+	renewPtr := flag.Bool("renew", false, "Renew currency data")
+	backupPtr := flag.Bool("backup", false, "Backup to Dropbox")
+	flag.Parse()
+
+	if *webPtr {
+		startWebService()
+	} else if *renewPtr {
+		currency.Renew()
+	} else if *backupPtr {
+		fmt.Println("Start backup")
+		cmd := exec.Command("python", "scripts/backup_to_dropbox.py")
+		outPipe, _ := cmd.StdoutPipe()
+		errPipe, _ := cmd.StderrPipe()
+
+		if err := cmd.Start(); err != nil {
+			panic(err)
+		}
+
+		scanner := bufio.NewScanner(outPipe)
+		for scanner.Scan() {
+			fmt.Println(scanner.Text())
+		}
+		scanner = bufio.NewScanner(errPipe)
+		for scanner.Scan() {
+			fmt.Println(scanner.Text())
+		}
+
+		cmd.Wait()
+	}
+}
+
+func startWebService() {
+	log.Println("Start web service.")
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/slack", slackHandler)
 	http.HandleFunc("/renew", renewHandler)
