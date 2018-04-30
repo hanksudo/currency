@@ -14,7 +14,7 @@ CSV_FOLDER = os.path.dirname(SCRIPT_FOLDER) + "/csvs/"
 def upload_file(filename):
     with open(CSV_FOLDER + filename, "r") as f:
         try:
-            print("Uploading file: {}").format(filename)
+            print("Uploading file: {}".format(filename))
             dbx.files_upload(f, "/{}".format(filename), mode=WriteMode("overwrite"))
         except ApiError as err:
             # This checks for the specific error where a user doesn't have
