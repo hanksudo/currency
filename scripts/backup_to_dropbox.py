@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 import os
 import dropbox
@@ -5,8 +7,6 @@ from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 
 
-# (https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
-TOKEN = ""
 SCRIPT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 CSV_FOLDER = os.path.dirname(SCRIPT_FOLDER) + "/csvs/"
 
@@ -14,7 +14,7 @@ CSV_FOLDER = os.path.dirname(SCRIPT_FOLDER) + "/csvs/"
 def upload_file(filename):
     with open(CSV_FOLDER + filename, "r") as f:
         try:
-            print "Uploading file: {}".format(filename)
+            print("Uploading file: {}").format(filename)
             dbx.files_upload(f, "/{}".format(filename), mode=WriteMode("overwrite"))
         except ApiError as err:
             # This checks for the specific error where a user doesn't have
@@ -31,7 +31,8 @@ def upload_file(filename):
 
 
 if __name__ == "__main__":
-    dbx = dropbox.Dropbox(TOKEN)
+    # (https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
+    dbx = dropbox.Dropbox(os.environ["DROPBOX_ACCESS_TOKEN"])
 
     # check token
     try:
