@@ -14,7 +14,6 @@ func Start() {
 	log.Println("Start web service.")
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/slack", slackHandler)
-	http.HandleFunc("/renew", renewHandler)
 	log.Fatal(http.ListenAndServe(":3030", logging(http.DefaultServeMux)))
 }
 
@@ -43,10 +42,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(content)
-}
-
-func renewHandler(w http.ResponseWriter, r *http.Request) {
-	currency.Renew()
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }

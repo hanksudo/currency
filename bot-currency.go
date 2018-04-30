@@ -7,6 +7,7 @@ import (
 	"github.com/hanksudo/bot-currency/backup"
 	"github.com/hanksudo/bot-currency/currency"
 	"github.com/hanksudo/bot-currency/web"
+	"github.com/robfig/cron"
 )
 
 // RootPath - root of project
@@ -22,6 +23,13 @@ func main() {
 	if len(os.Args) == 1 {
 		flag.PrintDefaults()
 	} else if *webPtr {
+		c := cron.New()
+		// Renew - Every one hour on weekday
+		c.AddFunc("0 0 * * * 1,2,3,4,5", currency.Renew)
+		// Backup - Every 3 hours on weekday
+		c.AddFunc("0 0 */3 * * 1,2,3,4,5", backup.Start)
+		c.Start()
+
 		web.Start()
 	} else if *renewPtr {
 		currency.Renew()
