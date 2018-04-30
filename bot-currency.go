@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"strings"
 
@@ -81,7 +82,9 @@ func main() {
 	backupPtr := flag.Bool("backup", false, "Backup to Dropbox")
 	flag.Parse()
 
-	if *webPtr {
+	if len(os.Args) == 1 {
+		flag.PrintDefaults()
+	} else if *webPtr {
 		startWebService()
 	} else if *renewPtr {
 		currency.Renew()
