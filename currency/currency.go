@@ -8,9 +8,11 @@ import (
 	"github.com/hanksudo/bot-currency/lib"
 )
 
+// Renew - currency data
 func Renew() {
+	log.Println("Currency data renew")
 	resp := lib.Fetch("http://rate.bot.com.tw/xrt/flcsv/0/day")
-	content_csv, err := ioutil.ReadAll(resp.Body)
+	contentCsv, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,7 +25,7 @@ func Renew() {
 			log.Fatal(err)
 		}
 		if mediatype == "attachment" {
-			ioutil.WriteFile("csvs/"+params["filename"], content_csv, 0644)
+			ioutil.WriteFile("csvs/"+params["filename"], contentCsv, 0644)
 			ioutil.WriteFile("latest.dat", []byte(params["filename"]), 0644)
 		}
 	}
