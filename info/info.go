@@ -10,6 +10,7 @@ import (
 	"strings"
 )
 
+// Currency - data structure
 type Currency struct {
 	Name     string  `json:"name"`
 	BuyCach  float64 `json:"buy_cash"`
@@ -18,21 +19,23 @@ type Currency struct {
 	SellSpot float64 `json:"sell_spot"`
 }
 
+// Currencies - array
 type Currencies []Currency
 
+// Get - get currency info
 func Get(currencyName string) (*Currency, error) {
 	content, err := ioutil.ReadFile("latest.dat")
 	if err != nil {
 		return nil, err
 	}
 
-	latest_csv := string(content)
-	content_csv, err := ioutil.ReadFile("csvs/" + latest_csv)
+	latestCsv := string(content)
+	contentCsv, err := ioutil.ReadFile("csvs/" + latestCsv)
 	if err != nil {
 		return nil, errors.New("fail")
 	}
 
-	r := csv.NewReader(strings.NewReader(string(content_csv)))
+	r := csv.NewReader(strings.NewReader(string(contentCsv)))
 
 	for {
 		record, err := r.Read()
