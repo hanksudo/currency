@@ -5,6 +5,7 @@ import (
 	"log"
 	"mime"
 	"net/http"
+	"os"
 )
 
 // Renew - currency data
@@ -23,11 +24,23 @@ func Renew() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		filename := params["filename"]
 		if mediatype == "attachment" {
-			ioutil.WriteFile("csvs/"+params["filename"], contentCsv, 0644)
-			ioutil.WriteFile("latest.dat", []byte(params["filename"]), 0644)
+			if pathExists("csvs/" + filename) {
+				log.Println("File exists", filename)
+				return
+			}
+			ioutil.WriteFile("csvs/"+filename, contentCsv, 0644)
+			ioutil.WriteFile("latest.dat", []byte(filename), 0644)
 		}
 	}
+}
+
+func pathExists(path string) bool {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
 
 func fetch(url string) *http.Response {
