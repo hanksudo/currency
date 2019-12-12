@@ -4,11 +4,12 @@ Currecny rate from BOT (Bank Of Taiwan)
 
 ## Features
 
-- Use Slack Slash commands to get currency rate
+- Download currency rete file from BOT
+- Periodically download new currency rate CSV file.
+- Periodically backup to dropbox.
+- Use [Slack Slash commands](https://api.slack.com/interactivity/slash-commands) to get latest currency rate
 
 <img src="./screenshots/slash_command.png" width="340">
-
-- History CSV files
 
 ## Installation
 
@@ -16,13 +17,16 @@ Currecny rate from BOT (Bank Of Taiwan)
 go get -u github.com/hanksudo/bot-currency
 ```
 
-- I develop on Mac and deploy this process on Ubuntu 12.04, you can use [gvm](https://github.com/moovweb/gvm) easily manage Go versions.
-
 ## Usage
 
 ```bash
-export DROPBOX_ACCESS_TOKEN=<YOUR-ACCESS-TOKEN>
+# start web server for Slack
 bot-currency -web
+
+# Retrieved latest CSV file immediately
 bot-currency -renew
+
+# Backup to dropbox
+export DROPBOX_ACCESS_TOKEN=<YOUR-ACCESS-TOKEN>
 bot-currency -backup
 ```
