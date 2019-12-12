@@ -7,7 +7,7 @@ import (
 	"github.com/hanksudo/bot-currency/backup"
 	"github.com/hanksudo/bot-currency/currency"
 	"github.com/hanksudo/bot-currency/web"
-	"github.com/robfig/cron"
+	"github.com/robfig/cron/v3"
 )
 
 // RootPath - root of project

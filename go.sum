@@ -1,2 +1,2 @@
-github.com/robfig/cron v0.0.0-20180418114506-da757ee1bf67 h1:1n/SZgT9xxu2PY3uHMVZuJ+ht5sSe98HEUIcYsngdUo=
-github.com/robfig/cron v0.0.0-20180418114506-da757ee1bf67/go.mod h1:JGuDeoQd7Z6yL4zQhZ3OPEVHB7fL6Ka6skscFHfmt2k=
+github.com/robfig/cron/v3 v3.0.0 h1:kQ6Cb7aHOHTSzNVNEhmp8EcWKLb4CbiMW9h9VyIhO4E=
+github.com/robfig/cron/v3 v3.0.0/go.mod h1:eQICP3HwyT7UooqI/z+Ov+PtYAWygg1TEWWzGIFLtro=

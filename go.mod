@@ -1,3 +1,5 @@
 module github.com/hanksudo/bot-currency
 
-require github.com/robfig/cron v0.0.0-20180418114506-da757ee1bf67
+require github.com/robfig/cron/v3 v3.0.0
+
+go 1.13
