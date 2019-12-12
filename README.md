@@ -30,3 +30,12 @@ bot-currency -renew
 export DROPBOX_ACCESS_TOKEN=<YOUR-ACCESS-TOKEN>
 bot-currency -backup
 ```
+
+## Test slack command on local environment
+
+```bash
+go run bot-currency.go -web
+ngrok http 3030
+```
+
+Then set your ngrok url on you slack command integration url.
