@@ -11,10 +11,12 @@ import (
 
 // Start - web service
 func Start() {
-	log.Println("Start web service.")
+	port := 3030
+	addr := fmt.Sprintf(":%d", port)
+	log.Println("Start web service on " + addr)
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/slack", slackHandler)
-	log.Fatal(http.ListenAndServe(":3030", logging(http.DefaultServeMux)))
+	log.Fatal(http.ListenAndServe(addr, logging(http.DefaultServeMux)))
 }
 
 func logging(handler http.Handler) http.Handler {
