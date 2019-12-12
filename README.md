@@ -4,7 +4,7 @@ Currecny rate from BOT (Bank Of Taiwan)
 
 ## Features
 
-- Download currency rete file from BOT
+- Download currency rate file from BOT
 - Periodically download new currency rate CSV file.
 - Periodically backup to dropbox.
 - Use [Slack Slash commands](https://api.slack.com/interactivity/slash-commands) to get latest currency rate
