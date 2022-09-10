@@ -13,7 +13,7 @@ import (
 func Start() {
 	port := 3030
 	addr := fmt.Sprintf(":%d", port)
-	log.Println("Start web service on " + addr)
+	log.Println("Start web service on http://localhost" + addr)
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/slack", slackHandler)
 	log.Fatal(http.ListenAndServe(addr, logging(http.DefaultServeMux)))
