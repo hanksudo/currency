@@ -12,7 +12,7 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-const version = "0.0.2"
+const version = "0.0.3"
 
 func main() {
 	versionPtr := flag.Bool("version", false, "Print the version")
