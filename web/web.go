@@ -27,16 +27,12 @@ func logging(handler http.Handler) http.Handler {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	currencyName := ""
-	for k := range r.URL.Query() {
-		currencyName = k
-		break
-	}
-
+	currencyName := r.URL.Query().Get("currency")
 	if currencyName == "" {
 		fmt.Fprint(w, "Hello?")
 		return
 	}
+
 	content, err := currency.Get(currencyName)
 	if err != nil {
 		fmt.Fprint(w, "What?")
