@@ -39,7 +39,7 @@ func Start() {
 				panic(err)
 			}
 			log.Println("Uploading file:", file.Name())
-			service.UploadFile(f)
+			service.UploadFile(f, file.Name())
 		}
 	}
 }

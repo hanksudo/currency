@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -27,10 +28,10 @@ func (s *DropboxService) Authenticated() bool {
 	return err == nil
 }
 
-func (s *DropboxService) UploadFile(file *os.File) {
+func (s *DropboxService) UploadFile(file *os.File, filename string) {
 	dbx := s.NewFileClient()
 
-	_, err := dbx.Upload(files.NewUploadArg(file.Name()), file)
+	_, err := dbx.Upload(files.NewUploadArg(fmt.Sprintf("/%s", filename)), file)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +59,13 @@ func (s *DropboxService) ListAllFilenames() []string {
 
 	var filenames []string
 	for _, entry := range entries {
-		filenames = append(filenames, entry.(*files.FileMetadata).Name)
+		switch entry := entry.(type) {
+		case *files.FileMetadata:
+			filenames = append(filenames, entry.Name)
+		default:
+			log.Println("This entry not FileMetadata", entry)
+		}
+
 	}
 	return filenames
 }
