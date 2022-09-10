@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 
 	"github.com/hanksudo/bot-currency/backup"
@@ -10,11 +11,15 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
+const version = "0.0.1"
+
 // RootPath - root of project
 var RootPath string
 
 func main() {
 	RootPath, _ = os.Getwd()
+
+	versionPtr := flag.Bool("version", false, "Print the version")
 	webPtr := flag.Bool("web", false, "Start web server")
 	renewPtr := flag.Bool("renew", false, "Renew currency data")
 	backupPtr := flag.Bool("backup", false, "Backup to Dropbox")
@@ -22,6 +27,8 @@ func main() {
 
 	if len(os.Args) == 1 {
 		flag.PrintDefaults()
+	} else if *versionPtr {
+		fmt.Printf("%s", version)
 	} else if *webPtr {
 		c := cron.New()
 		// Renew - Every one hour on weekday
