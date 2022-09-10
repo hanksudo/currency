@@ -14,7 +14,7 @@ Currecny rate from BOT (Bank Of Taiwan)
 ## Installation
 
 ```bash
-go get -u github.com/hanksudo/bot-currency
+go install github.com/hanksudo/bot-currency@latest
 ```
 
 ## Usage
