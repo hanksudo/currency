@@ -1,7 +1,7 @@
 package currency
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"mime"
 	"net/http"
@@ -10,9 +10,9 @@ import (
 
 // Renew - currency data
 func Renew() {
-	log.Println("Currency data renew")
-	resp := fetch("http://rate.bot.com.tw/xrt/flcsv/0/day")
-	contentCsv, err := ioutil.ReadAll(resp.Body)
+	log.Println("Refetch Currency data")
+	resp := fetch("https://rate.bot.com.tw/xrt/flcsv/0/day")
+	contentCsv, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,8 +30,8 @@ func Renew() {
 				log.Println("File exists", filename)
 				return
 			}
-			ioutil.WriteFile("csvs/"+filename, contentCsv, 0644)
-			ioutil.WriteFile("latest.dat", []byte(filename), 0644)
+			os.WriteFile("csvs/"+filename, contentCsv, 0644)
+			os.WriteFile("latest.dat", []byte(filename), 0644)
 		}
 	}
 }
