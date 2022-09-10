@@ -28,9 +28,8 @@ curl "http://localhost:3030?currency=jpy"
 # Retrieved latest CSV file
 bot-currency -renew
 
-# Backup to dropbox
+# Backup to Dropbox
 # You need generate access token from your Dropbox app setting page
-pip install -r scripts/requirements.txt
 export DROPBOX_ACCESS_TOKEN=<YOUR-ACCESS-TOKEN>
 bot-currency -backup
 ```
