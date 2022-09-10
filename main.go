@@ -13,12 +13,7 @@ import (
 
 const version = "0.0.1"
 
-// RootPath - root of project
-var RootPath string
-
 func main() {
-	RootPath, _ = os.Getwd()
-
 	versionPtr := flag.Bool("version", false, "Print the version")
 	webPtr := flag.Bool("web", false, "Start web server")
 	renewPtr := flag.Bool("renew", false, "Renew currency data")
