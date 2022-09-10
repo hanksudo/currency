@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/hanksudo/bot-currency/backup"
@@ -37,5 +38,7 @@ func main() {
 		currency.Renew()
 	} else if *backupPtr {
 		backup.Start()
+	} else {
+		log.Println("No command match!")
 	}
 }
