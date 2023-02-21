@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/hanksudo/bot-currency/currency"
+	"github.com/hanksudo/currency/currency"
 )
 
 // Start - web service

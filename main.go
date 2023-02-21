@@ -6,9 +6,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/hanksudo/bot-currency/backup"
-	"github.com/hanksudo/bot-currency/currency"
-	"github.com/hanksudo/bot-currency/web"
+	"github.com/hanksudo/currency/backup"
+	"github.com/hanksudo/currency/currency"
+	"github.com/hanksudo/currency/web"
 	"github.com/robfig/cron/v3"
 )
 

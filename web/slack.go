@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/hanksudo/bot-currency/currency"
+	"github.com/hanksudo/currency/currency"
 )
 
 type slackAttachment struct {

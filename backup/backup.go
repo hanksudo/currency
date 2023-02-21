@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/hanksudo/bot-currency/services"
+	"github.com/hanksudo/currency/services"
 	"golang.org/x/exp/slices"
 )
 

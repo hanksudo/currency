@@ -1,7 +1,10 @@
-# bot-currency
+# Currency
 
-Currecny rate from BOT (Bank Of Taiwan)
-<https://rate.bot.com.tw/xrt>
+Currency services
+
+## Sources
+
+- BOT (Bank Of Taiwan) - <https://rate.bot.com.tw/xrt>
 
 ## Features
 
@@ -15,23 +18,23 @@ Currecny rate from BOT (Bank Of Taiwan)
 ## Installation
 
 ```bash
-go install github.com/hanksudo/bot-currency@latest
+go install github.com/hanksudo/currency@latest
 ```
 
 ## Usage
 
 ```bash
 # start web server for Slack
-bot-currency -web
+currency -web
 curl "http://localhost:3030?currency=jpy"
 
 # Retrieved latest CSV file
-bot-currency -renew
+currency -renew
 
 # Backup to Dropbox
 # You need generate access token from your Dropbox app setting page
 export DROPBOX_ACCESS_TOKEN=<YOUR-ACCESS-TOKEN>
-bot-currency -backup
+currency -backup
 ```
 
 ## Test slack command on local environment
