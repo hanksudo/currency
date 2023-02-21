@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/hanksudo/currency/currency"
+	"github.com/hanksudo/currency/services/bot"
 )
 
 type slackAttachment struct {
@@ -20,7 +20,7 @@ type slackPostMessage struct {
 }
 
 func slackHandler(w http.ResponseWriter, r *http.Request) {
-	currency, err := currency.Get(r.FormValue("text"))
+	currency, err := bot.Get(r.FormValue("text"))
 	response := ""
 	if err != nil {
 		response = "找不到這個貨幣耶\nUSD, HKD, GBP, AUD, CAD, SGD, CHF, JPY, ZAR, SEK, NZD, THB, PHP, IDR, EUR, KRW, VND, MYR, CNY"

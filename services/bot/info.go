@@ -1,4 +1,4 @@
-package currency
+package bot
 
 import (
 	"encoding/csv"
