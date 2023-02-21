@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/hanksudo/currency/backup"
+	"github.com/hanksudo/currency/handlers"
 	"github.com/hanksudo/currency/services/bot"
-	"github.com/hanksudo/currency/web"
 	"github.com/robfig/cron/v3"
 )
 
@@ -33,7 +33,7 @@ func main() {
 		c.AddFunc("0 0 */3 * * 1,2,3,4,5", backup.Start)
 		c.Start()
 
-		web.Start()
+		handlers.Start()
 	} else if *renewPtr {
 		bot.Renew()
 	} else if *backupPtr {
