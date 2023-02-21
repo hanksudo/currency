@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/hanksudo/currency/services"
 	"golang.org/x/exp/slices"
@@ -33,6 +34,10 @@ func Start() {
 	}
 
 	for _, file := range files {
+		if !strings.HasSuffix(file.Name(), ".csv") {
+			fmt.Println("File " + file.Name() + " ignored")
+			continue
+		}
 		if !slices.Contains(existsFilenames, file.Name()) {
 			f, err := os.Open(fmt.Sprintf("%s/%s", folderPath, file.Name()))
 			if err != nil {
